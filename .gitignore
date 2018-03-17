@@ -1,0 +1,13 @@
+.settings
+.project
+.classpath
+.checkstyle
+target/
+
+# idea gitignore
+.idea
+.idea/
+*.iml
+
+src/test/
+/bin/

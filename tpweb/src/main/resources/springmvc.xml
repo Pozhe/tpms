@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <!-- 扫描业务代码 -->
+    <context:component-scan base-package="com.txzhe"></context:component-scan>
+
+    <!-- 告知spring，启用springmvc的注解驱动 -->
+    <!--<mvc:annotation-driven />-->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+            <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- 配置视图解析器 当然springMVC也支持多视图，比如json、pdf、jsp等等，具体配置大家可以看一下这篇文章：http://loushi135.iteye.com/blog/1676280-->
+    <!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀
+     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+       <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+       <property name="prefix" value="/"/>
+       <property name="suffix" value=".jsp"/>
+     </bean>
+      -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="order" value="10"></property>
+        <property name="prefix" value="/resources/"></property>
+        <property name="suffix" value=".html"/>
+        <property name="contentType" value="text/html"></property>
+    </bean>
+
+</beans>

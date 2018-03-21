@@ -3,7 +3,7 @@ package com.tpms.entity.system;
 import java.io.Serializable;
 import java.util.List;
 
-public class MenuDTO implements Serializable{
+public class MenuDto implements Serializable {
     private String id;
     private String name;
     private String url;
@@ -11,7 +11,7 @@ public class MenuDTO implements Serializable{
     private Integer parent;
     private Integer state;
     private String roleName;
-    private List<MenuDTO> submenu;
+    private List<MenuDto> submenu;
 
     public String getName() {
         return name;
@@ -69,11 +69,11 @@ public class MenuDTO implements Serializable{
         this.roleName = roleName;
     }
 
-    public List<MenuDTO> getSubmenu() {
+    public List<MenuDto> getSubmenu() {
         return submenu;
     }
 
-    public void setSubmenu(List<MenuDTO> submenu) {
+    public void setSubmenu(List<MenuDto> submenu) {
         this.submenu = submenu;
     }
 }

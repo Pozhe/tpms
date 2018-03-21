@@ -1,6 +1,6 @@
 package com.tpms.controller.system;
 
-import com.tpms.entity.system.MenuDTO;
+import com.tpms.entity.system.MenuDto;
 import com.tpms.service.intf.system.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,31 +19,41 @@ public class HomeController {
     @Autowired
     private IMenuService menuService;
 
+    /**
+     * 获取菜单JSON
+     * @return json数据
+     */
     @RequestMapping(value = "/menu")
     @ResponseBody
-    public Object listMenu(){
+    public Object listMenu() {
 
-        //获取cookie中登录名称，判断是否登录
+        // 获取cookie中登录名称，判断是否登录
         Map<String, Object> map = new HashMap<>();
-        map.put("userName","111");
-        List<MenuDTO> dtoList = menuService.queryAll(map);
-        List<MenuDTO> menuDTOS = treeMenuList(dtoList, 0);
-        return menuDTOS;
+        map.put("userName", "111");
+        List<MenuDto> dtoList = menuService.queryAll(map);
+        List<MenuDto> menuDtos = treeMenuList(dtoList, 0);
+        return menuDtos;
     }
 
-    public List<MenuDTO> treeMenuList(List<MenuDTO> menuList, int parentId) {
-        List<MenuDTO> tmpList = new ArrayList<>();
-        for (MenuDTO dto:menuList) {
-            if(dto.getParent() == parentId){
+    /**
+     * 构建菜单列表对象
+     * @param menuList db中查询出来的集合
+     * @param parentId 父ID
+     * @return
+     */
+    public List<MenuDto> treeMenuList(List<MenuDto> menuList, int parentId) {
+        List<MenuDto> tmpList = new ArrayList<>();
+        for (MenuDto dto : menuList) {
+            if (dto.getParent() == parentId) {
                 tmpList.add(dto);
-                dto.setSubmenu(treeMenuList(menuList,Integer.parseInt(dto.getId())));
+                dto.setSubmenu(treeMenuList(menuList, Integer.parseInt(dto.getId())));
             }
         }
         return tmpList;
     }
 
     @RequestMapping(value = "/main")
-    public ModelAndView toIndex(){
+    public ModelAndView toIndex() {
         return new ModelAndView("index");
     }
 }

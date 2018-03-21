@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tpms.dao.system.IMenuDao">
-    <select id="queryAll" parameterType="java.util.Map" resultType="com.tpms.entity.system.MenuDTO">
+    <select id="queryAll" parameterType="java.util.Map" resultType="com.tpms.entity.system.MenuDto">
         SELECT
             p.id,
             p.name,

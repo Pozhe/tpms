@@ -79,6 +79,13 @@
       <artifactId>fastjson</artifactId>
       <version>1.1.34</version>
     </dependency>
+    <!-- Redis JAR-->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+
 
   </dependencies>
   <!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->

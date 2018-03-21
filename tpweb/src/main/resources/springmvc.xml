@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
     <!-- 扫描业务代码 -->
-    <context:component-scan base-package="com.txzhe"></context:component-scan>
+    <context:component-scan base-package="com.tpms"></context:component-scan>
 
     <!-- 告知spring，启用springmvc的注解驱动 -->
     <!--<mvc:annotation-driven />-->

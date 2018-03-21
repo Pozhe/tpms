@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tpms.dao.system.IMenuDao">
+    <select id="queryAll" parameterType="java.util.Map" resultType="com.tpms.entity.system.MenuDTO">
+        SELECT
+            p.id,
+            p.name,
+            p.url,
+            p.icon,
+            p.parent,
+            p.state,
+            r.roleName
+        FROM
+            t_system_user u
+                LEFT JOIN
+            t_user_role ur ON u.id = ur.userId
+                LEFT JOIN
+            t_system_role r ON r.id = ur.roleId
+                LEFT JOIN
+            t_role_privilege rp ON r.id = rp.roleId
+                LEFT JOIN
+            t_system_privilege p ON p.id = rp.privilegeId
+        WHERE
+            u.userName = #{q.userName}
+    </select>
+</mapper>

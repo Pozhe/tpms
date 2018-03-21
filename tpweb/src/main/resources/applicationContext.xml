@@ -29,7 +29,7 @@
         <!-- 指定MyBatis mapper文件的位置 -->
         <property name="mapperLocations">
             <list>
-                <value>classpath*:com/txzhe/dao/**/*.xml</value>
+                <value>classpath*:com/tpms/dao/**/*.xml</value>
             </list>
         </property>
         <!-- 指定MyBatis全局配置文件的位置 -->
@@ -39,7 +39,7 @@
     <!-- 扫描MyBatis的mapper接口 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--扫描所有DAO接口的实现，加入到IOC容器中 -->
-        <property name="basePackage" value="com.txzhe.dao.menu"/>
+        <property name="basePackage" value="com.tpms.dao.system"/>
     </bean>
 
     <!-- 配置事务管理器 -->
@@ -61,7 +61,7 @@
     <!-- 开启基于注解的事务  -->
     <aop:config>
         <!-- 切入点表达式 -->
-        <aop:pointcut expression="execution(* com.txzhe.service.impl.*.*(..))" id="txPoint"/>
+        <aop:pointcut expression="execution(* com.tpms.service.impl.*.*(..))" id="txPoint"/>
         <!-- 配置事务增强 -->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
     </aop:config>

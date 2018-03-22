@@ -16,7 +16,6 @@ public class MenuServiceImpl implements IMenuService {
     private IMenuDao menuDao;
 
     public List<MenuDto> queryAll(Map<String, Object> map) {
-        // TODO Auto-generated method stub
         return menuDao.queryAll(map);
     }
 

@@ -2,11 +2,13 @@ require.config({
     baseUrl:'assets/js/',
     paths:{
         'ace' : 'ace.min',
+        'sys' : 'menu/menu',
         'jquery':'jquery-2.0.3.min',
         'bootstrap' : 'bootstrap.min',
         'ace-elements' : 'ace-elements.min',
         'template':'artTemplate/template-web',
-        'sys' : 'menu/menu'
+        'jquery_dataTables':'jquery.dataTables.min',
+        'jquery_dataTables_bootstrap':'jquery.dataTables.bootstrap'
     },
     shim:{
         'jquery' : {
@@ -26,6 +28,14 @@ require.config({
         },
         'template' : {
             exports :'template'
+        },
+        'jquery_dataTables' : {
+            deps : ['jquery'],
+            exports :'jquery_dataTables'
+        },
+        'jquery_dataTables_bootstrap' : {
+            deps : ['jquery','bootstrap','jquery_dataTables'],
+            exports :'jquery_dataTables_bootstrap'
         }
     }
 });

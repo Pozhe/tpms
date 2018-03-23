@@ -32,7 +32,10 @@ public class HomeController {
         map.put("userName", "111");
         List<MenuDto> dtoList = menuService.queryAll(map);
         List<MenuDto> menuDtos = treeMenuList(dtoList, 0);
-        return menuDtos;
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("list",menuDtos);
+        resultMap.put("basePath","/tpms");
+        return resultMap;
     }
 
     /**

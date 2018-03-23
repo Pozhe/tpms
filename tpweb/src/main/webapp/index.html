@@ -297,76 +297,10 @@
 				</div>
 			</div>
 
-			<div class="main-content">
-				<div class="breadcrumbs" id="breadcrumbs">
-					<ul class="breadcrumb">
-						<li>
-							<i class="icon-home home-icon"></i>
-							<a href="#">Home</a>
+			<div class="main-content" id="fillContent">
 
-							<span class="divider">
-									<i class="icon-angle-right arrow-icon"></i>
-								</span>
-						</li>
-						<li class="active">Dashboard</li>
-					</ul><!--.breadcrumb-->
-
-					<div class="nav-search" id="nav-search">
-						<form class="form-search" />
-						<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="icon-search nav-search-icon"></i>
-								</span>
-						</form>
-					</div><!--#nav-search-->
-				</div>
-				<div class="page-content" id="fillContent">
-
-				</div><!--/.page-content-->
-			</div><!--/.main-content-->
-		</div><!--/.main-container-->
-		<!--[if !IE]>-->
-		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
-		<!--<![endif]-->
-		<!--[if IE]>
-		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
-		<![endif]-->
-		<!--[if !IE]>-->
-		<script type="text/javascript">
-            window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-		</script>
-		<!--<![endif]-->
-		<!--[if IE]>
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-		</script>
-		<![endif]-->
-		<script type="text/javascript">
-            if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-		<script src="assets/js/bootstrap.min.js"></script>
-		<!--[if lte IE 8]>
-		<script src="assets/js/excanvas.min.js"></script>
-		<![endif]-->
-		<script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
-		<script src="assets/js/menu.js"></script>
-		<script type="text/javascript">
-			$(function () {
-				$.ajax({
-					method : "GET",
-					url : "/tpms/menu",
-					dataType : "json",
-                    contentType:'application/json;charset=UTF-8',
-                    success : function (data) {
-						//console.log(data);
-                        handleMenu(data, $(".nav"));
-                    },
-					error : function (e) {
-						console.log(e);
-                    }
-				});
-            });
-		</script>
+			</div>
+		</div>
+		<script data-main="assets/js/baseConfig"  src="assets/js/requirejs/require.js"></script>
 	</body>
 </html>

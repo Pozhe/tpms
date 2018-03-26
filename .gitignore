@@ -11,3 +11,7 @@ target/
 
 src/test/
 /bin/
+
+.DS_Store
+META-INF/
+tpweb/.DS_Store

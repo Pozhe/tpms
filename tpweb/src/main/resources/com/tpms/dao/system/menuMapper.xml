@@ -20,7 +20,19 @@
             t_role_privilege rp ON r.id = rp.roleId
                 LEFT JOIN
             t_system_privilege p ON p.id = rp.privilegeId
-        WHERE
-            u.userName = #{q.userName}
+        WHERE 1 = 1
+        <if test="q.userName != null and q.userName != ''">
+            AND u.userName = #{q.userName}
+        </if>
+    </select>
+    <select id="queryMenuList" resultType="com.tpms.entity.system.MenuDto">
+        SELECT
+            p.id,
+            p.name,
+            p.parent
+        FROM
+            t_system_privilege p
+        where
+            p.state = 1
     </select>
 </mapper>

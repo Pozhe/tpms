@@ -19,4 +19,9 @@ public class MenuServiceImpl implements IMenuService {
         return menuDao.queryAll(map);
     }
 
+    @Override
+    public List<MenuDto> queryMenuList() {
+        return menuDao.queryMenuList();
+    }
+
 }

@@ -13,13 +13,13 @@
 		<link rel="stylesheet" href="assets/css/ace.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-responsive.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="assets/js/zTree_v3/css/zTreeStyle/zTreeStyle.css">
 		<!--[if IE 7]>
 		<link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
 		<!--[if lte IE 8]>
 		<link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
-		<script src="assets/js/artTemplate/template-web.js"></script>
 	</head>
 	<body>
 		<div class="page-header position-relative">
@@ -30,6 +30,7 @@
 		<div class="row-fluid">
 			<div class="span12 row-fluid">
 				<div id="content" class="dd">
+					<ul id="tree" class="ztree"></ul>
 				</div>
 			</div>
 		</div>
@@ -50,17 +51,43 @@
                     }
                 }
             });
-            require(['jquery','template'],function ($,template) {
-                var testData = {
+            require(['jquery','template','zTree','zTree_excheck'],function ($,template) {
+                /*var testData = {
                     list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+                };*/
+                var zTreeObj;
+                // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+                var setting = {
+                    data: {
+                        simpleData: {
+                            enable: true,
+                            idKey: "id",
+                            pIdKey: "parent",
+                            rootPId: 0
+                        }
+                    },
+                    check: {
+                        enable: true
+                    }
                 };
                 $.ajax({
                     method : "GET",
-                    url : "/tpms/template/list.art",
-                    success : function (data) {
-                        var render = template.compile(data);
-                        var html = render(testData);
-                        $("#content").html(html);
+                    url : "/tpms/listMenuJson",
+                    success : function (menuJSON) {
+                        console.log(menuJSON);
+                        zTreeObj = $.fn.zTree.init($("#tree"), setting, menuJSON);
+                        // $.ajax({
+                        //     method : "GET",
+                        //     url : "/tpms/template/list.art",
+                        //     success : function (data) {
+                        //         var render = template.compile(data);
+                        //         var html = render(menuJSON);
+                        //         $("#content").html(html);
+                        //     },
+                        //     error : function (e) {
+                        //         console.log(e);
+                        //     }
+                        // });
                     },
                     error : function (e) {
                         console.log(e);

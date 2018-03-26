@@ -8,7 +8,9 @@ require.config({
         'ace-elements' : 'ace-elements.min',
         'template':'artTemplate/template-web',
         'jquery_dataTables':'jquery.dataTables.min',
-        'jquery_dataTables_bootstrap':'jquery.dataTables.bootstrap'
+        'jquery_dataTables_bootstrap':'jquery.dataTables.bootstrap',
+        'zTree':'zTree_v3/js/jquery.ztree.core',
+        'zTree_excheck':'zTree_v3/js/jquery.ztree.excheck'
     },
     shim:{
         'jquery' : {
@@ -36,6 +38,14 @@ require.config({
         'jquery_dataTables_bootstrap' : {
             deps : ['jquery','bootstrap','jquery_dataTables'],
             exports :'jquery_dataTables_bootstrap'
+        },
+        'zTree' : {
+            deps : ['jquery'],
+            exports :'zTree'
+        },
+        'zTree_excheck' : {
+            deps : ['jquery','zTree'],
+            exports :'zTree_excheck'
         }
     }
 });

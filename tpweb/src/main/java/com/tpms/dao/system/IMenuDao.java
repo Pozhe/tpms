@@ -8,4 +8,6 @@ import java.util.Map;
 
 public interface IMenuDao {
     List<MenuDto> queryAll(@Param("q") Map<String,Object> queryMap);
+
+    List<MenuDto> queryMenuList();
 }

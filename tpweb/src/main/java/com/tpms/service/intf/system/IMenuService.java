@@ -7,4 +7,6 @@ import java.util.Map;
 
 public interface IMenuService {
     List<MenuDto> queryAll(Map<String, Object> map);
+
+    List<MenuDto> queryMenuList();
 }

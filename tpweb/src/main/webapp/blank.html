@@ -6,20 +6,8 @@
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
-		<link rel="stylesheet" href="assets/css/ace-responsive.min.css" />
-		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="assets/js/zTree_v3/css/zTreeStyle/zTreeStyle.css">
-		<!--[if IE 7]>
-		<link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-		<![endif]-->
-		<!--[if lte IE 8]>
-		<link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
+		<link rel="stylesheet" href="assets/js/layer/theme/default/layer.css">
 	</head>
 	<body>
 		<div class="page-header position-relative">
@@ -30,7 +18,7 @@
 		<div class="row-fluid">
 			<div class="span12 row-fluid">
 				<div id="content" class="dd">
-					<ul id="tree" class="ztree"></ul>
+					<ul id="tree" class="ztree" style="border: 1px solid red;width:200px;"></ul>
 				</div>
 			</div>
 		</div>
@@ -51,7 +39,7 @@
                     }
                 }
             });
-            require(['jquery','template','zTree','zTree_excheck'],function ($,template) {
+            require(['jquery','template','layer','zTree','zTree_excheck'],function ($,template,layer) {
                 /*var testData = {
                     list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
                 };*/
@@ -74,7 +62,7 @@
                     method : "GET",
                     url : "/tpms/listMenuJson",
                     success : function (menuJSON) {
-                        console.log(menuJSON);
+                        //console.log(menuJSON);
                         zTreeObj = $.fn.zTree.init($("#tree"), setting, menuJSON);
                         // $.ajax({
                         //     method : "GET",

@@ -10,7 +10,8 @@ require.config({
         'jquery_dataTables':'jquery.dataTables.min',
         'jquery_dataTables_bootstrap':'jquery.dataTables.bootstrap',
         'zTree':'zTree_v3/js/jquery.ztree.core',
-        'zTree_excheck':'zTree_v3/js/jquery.ztree.excheck'
+        'zTree_excheck':'zTree_v3/js/jquery.ztree.excheck',
+        'layer' : 'layer/layer'
     },
     shim:{
         'jquery' : {
@@ -46,6 +47,10 @@ require.config({
         'zTree_excheck' : {
             deps : ['jquery','zTree'],
             exports :'zTree_excheck'
+        },
+        'layer' : {
+            deps : ['jquery'],
+            exports :'layer'
         }
     }
 });

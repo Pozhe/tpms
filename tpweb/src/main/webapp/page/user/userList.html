@@ -1,10 +1,11 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Ace</title>
     <meta name="description" content="overview &amp; stats"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="assets/js/zTree_v3/css/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="assets/js/layer/theme/default/layer.css">
     <style>
         .control-label {
             line-height: 35px;
@@ -24,20 +25,28 @@
                 <i class="icon-home home-icon"></i>
                 <a href="#">Home</a>
                 <span class="divider">
-							<i class="icon-angle-right arrow-icon"></i>
-						</span>
+                    <i class="icon-angle-right arrow-icon"></i>
+                </span>
             </li>
             <li class="active">Dashboard</li>
         </ul>
         <div class="nav-search" id="nav-search" style="top:-14px;">
             <form class="form-search"/>
-            <span class="input-icon">
-							<input type="text" placeholder="Search ..." class="input-small nav-search-input"
-                                   id="nav-search-input" autocomplete="off"/>
-							<i class="icon-search nav-search-icon"></i>
-						</span>
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="input-small nav-search-input"
+                           id="nav-search-input" autocomplete="off"/>
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
             </form>
         </div>
+    </div>
+    <div id="treeDiv" style="display:none;">
+        <div class="span12">
+            <ul id="tree" class="ztree"></ul>
+        </div>
+        <a class="btn btn-small btn-success addPrivilegeBtn" style="width: 100%;border:0px;margin-top:35px;padding:0px;">
+            Ok
+        </a>
     </div>
     <div class="page-content">
         <div class="page-header position-relative">
@@ -52,38 +61,30 @@
                                 <div class="widget-main">
                                     <div class="form-search">
                                         <div class="span12">
-                                            <div class="span3">
+                                            <div class="span4">
                                                 <label class="control-label">用户名:</label>
                                                 <input type="text" class="input-medium search-query">
                                             </div>
-                                            <div class="span3">
+                                            <div class="span4">
                                                 <label class="control-label">密码:</label>
                                                 <input type="text" class="input-medium search-query">
                                             </div>
-                                            <div class="span3">
+                                            <div class="span4">
                                                 <label class="control-label">邮箱:</label>
-                                                <input type="text" class="input-medium search-query">
-                                            </div>
-                                            <div class="span3">
-                                                <label class="control-label">年龄:</label>
                                                 <input type="text" class="input-medium search-query">
                                             </div>
                                         </div>
                                         <div class="span12" style="margin-left: 0px;">
-                                            <div class="span3">
+                                            <div class="span4">
                                                 <label class="control-label">用户名:</label>
                                                 <input type="text" class="input-medium search-query">
                                             </div>
-                                            <div class="span3">
+                                            <div class="span4">
                                                 <label class="control-label">密码:</label>
                                                 <input type="text" class="input-medium search-query">
                                             </div>
-                                            <div class="span3">
+                                            <div class="span4">
                                                 <label class="control-label">邮箱:</label>
-                                                <input type="text" class="input-medium search-query">
-                                            </div>
-                                            <div class="span3">
-                                                <label class="control-label">年龄:</label>
                                                 <input type="text" class="input-medium search-query">
                                             </div>
                                         </div>
@@ -102,6 +103,11 @@
         <div class="row-fluid">
             <div class="span12 row-fluid">
                 <div id="content" class="dd">
+                    <div class="btn-group">
+                        <button class="btn btn-info btn-small addPrivilege">添加权限</button>
+                        <button class="btn btn-danger btn-small">Add</button>
+                        <button class="btn btn-warning btn-small">Add</button>
+                    </div>
                     <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
@@ -588,8 +594,11 @@
     </div>
 </div>
 <script type="text/javascript">
-    require(['jquery', 'template', 'jquery_dataTables', 'jquery_dataTables_bootstrap'], function ($, template) {
+    require(['jquery', 'template','layer', 'jquery_dataTables', 'jquery_dataTables_bootstrap','zTree','zTree_excheck'], function ($, template,layer) {
         var $ = require("jquery");
+
+        var zTreeObj;
+
         var base = {
             basePath: '/tpms',
             query: {
@@ -614,9 +623,50 @@
         $("#content").on("click", "#show", function () {
             alert("dddd");
         });
+        var privilegeLayerIndex;
+        $("#content").on("click", "button.addPrivilege", function () {
+            var setting = {
+                data: {
+                    simpleData: {
+                        enable: true,
+                        idKey: "id",
+                        pIdKey: "parent",
+                        rootPId: 0
+                    }
+                },
+                check: {
+                    enable: true
+                }
+            };
+            $.ajax({
+                method : "GET",
+                url : "/tpms/listMenuJson",
+                success : function (menuJSON) {
+                    //console.log(menuJSON);
+                    zTreeObj = $.fn.zTree.init($("#tree"), setting, menuJSON);
+                    privilegeLayerIndex = layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        scrollbar: false,
+                        title: '选择权限',
+                        closeBtn: 0,
+                        anim: 2,
+                        shadeClose: true, //开启遮罩关闭
+                        offset: 't',
+                        content: $("#treeDiv")
+                    });
+                    zTreeObj.expandAll(true);
+                },
+                error : function (e) {
+                    console.log(e);
+                }
+            });
+        });
+        $("a.addPrivilegeBtn").on("click",function () {
+            layer.close(privilegeLayerIndex);
+        });
 
-
-        // DataTable http://www.datatables.club/example/#basic_init
+        // DataTablehttp://www.datatables.club/example/#basic_init
         $("#sample-table-2").DataTable();
     });
 </script>

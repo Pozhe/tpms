@@ -663,9 +663,36 @@
             });
         });
         $("a.addPrivilegeBtn").on("click",function () {
+            var nodes = zTreeObj.getChangeCheckedNodes();
+            console.log(nodes);
+            var sIds = [];
+            if(nodes){
+                nodes.map(function (item,index) {
+                    sIds.push(item.id);
+                });
+            }
+            var submitData =  {
+                privilegeIds : sIds,
+                roleId : 2
+            };
+            $.ajax({
+                method : "POST",
+                url : "/tpms/sys/addPrivilege",
+                data :{param:JSON.stringify(submitData)},
+                success : function (data) {
+                    //console.log(data);
+                    if(data.code === "200"){
+                        layer.msg("添加权限成功");
+                    }else{
+                        layer.msg("添加权限失败");
+                    }
+                },
+                error : function (e) {
+                    console.log(e);
+                }
+            });
             layer.close(privilegeLayerIndex);
         });
-
         // DataTablehttp://www.datatables.club/example/#basic_init
         $("#sample-table-2").DataTable();
     });

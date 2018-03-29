@@ -10,4 +10,6 @@ public interface IMenuDao {
     List<MenuDto> queryAll(@Param("q") Map<String,Object> queryMap);
 
     List<MenuDto> queryMenuList();
+
+    Integer addPrivilege(@Param("roleId") Integer roleId, @Param("privilegeIds") Object[] privilegeIds);
 }

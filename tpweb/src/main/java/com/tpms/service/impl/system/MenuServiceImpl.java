@@ -24,4 +24,9 @@ public class MenuServiceImpl implements IMenuService {
         return menuDao.queryMenuList();
     }
 
+    @Override
+    public Integer addPrivilege(Integer roleId, Object[] privilegeIds) {
+        return menuDao.addPrivilege(roleId,privilegeIds);
+    }
+
 }

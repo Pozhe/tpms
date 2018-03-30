@@ -1,6 +1,7 @@
 package com.tpms.service.intf.system;
 
 import com.tpms.entity.system.MenuDto;
+import com.tpms.entity.user.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,4 +13,8 @@ public interface IMenuService {
     List<MenuDto> queryMenuList();
 
     Integer addPrivilege(Integer roleId,Object[] privilegeIds);
+
+    List<User> queryUsers(User user,Map<String,Object> page);
+
+    Integer totalRecords(String tableName);
 }

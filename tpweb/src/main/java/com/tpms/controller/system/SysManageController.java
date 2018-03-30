@@ -46,4 +46,21 @@ public class SysManageController {
         }
         return map;
     }
+
+    @RequestMapping(value = "/listUser")
+    @ResponseBody
+    public Object listUser(@Param("param")String param){
+        User user = new User();
+        Map<String,Object> page = new HashMap<>();
+        page.put("start",0);
+        page.put("length",10);
+        List<User> userList = menuService.queryUsers(user,page);
+        Map<Object, Object> info = new HashMap<Object, Object>();
+        Integer recordsTotal = menuService.totalRecords("t_system_user");
+        info.put("aaData", userList);
+        info.put("recordsTotal", recordsTotal);
+        info.put("recordsFiltered", 0);
+        info.put("draw", 0);
+        return info;
+    }
 }

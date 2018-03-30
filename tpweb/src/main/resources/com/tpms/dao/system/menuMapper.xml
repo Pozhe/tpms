@@ -38,6 +38,20 @@
             p.state = 1
     </select>
 
+    <select id="listUser" parameterType="com.tpms.entity.user.User" resultType="com.tpms.entity.user.User">
+        SELECT
+            *
+        FROM
+            t_system_user u
+        ORDER BY
+          u.id
+        ASC
+        limit #{pc.start},#{pc.length}
+    </select>
+    <select id="totalRecords" resultType="java.lang.Integer">
+        select count(0) from ${tableName}
+    </select>
+
     <insert id="addPrivilege">
         insert into
             t_role_privilege(roleId,privilegeId)
